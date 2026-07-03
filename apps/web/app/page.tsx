@@ -54,7 +54,6 @@ export default function Onboarding() {
           alt="Introduction"
           fill
           priority
-          sizes="50vw"
           className="object-cover object-top"
         />
       </div>
@@ -332,7 +331,7 @@ export default function Onboarding() {
           </Carousel>
 
           <div className=" mt-4 flex flex-col w-full gap-2 sm:flex-row sm:w-full sm:max-w-2xl sm:justify-between">
-            <Link href="/signin">
+            <Link href="/sign-in">
               <Button
                 type="button"
                 variant="ghost"
@@ -353,7 +352,7 @@ export default function Onboarding() {
                 Previous
               </Button>
               {isLastStep ? (
-                <Link href="/signin">
+                <Link href="/sign-in">
                   <Button type="button" className="h-12 w-full sm:w-32">
                     Get Started
                   </Button>
