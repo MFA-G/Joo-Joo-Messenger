@@ -5,7 +5,7 @@ import { type SignupInput, signupSchema } from "@joo-joo-messenger/schemas";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
-import { type SubmitHandler, useForm } from "react-hook-form";
+import { type SubmitHandler, useForm, useWatch } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -16,14 +16,27 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { useSignupMutate } from "@/hooks/use-auth";
+import { useCheckUsernameQuery, useSignupMutate } from "@/hooks/use-auth";
+import { useDebounce } from "@/hooks/use-debounce";
 
 export default function SignUp() {
-  const { register, handleSubmit } = useForm({
+  const [isChecked, setIsChecked] = React.useState(false);
+  const {
+    register,
+    handleSubmit,
+
+    control,
+  } = useForm({
     resolver: zodResolver(signupSchema),
     mode: "onChange",
   });
-  const [isChecked, setIsChecked] = React.useState(false);
+
+  const username = useWatch({ control, name: "username", defaultValue: "" });
+  const _password = useWatch({ control, name: "password", defaultValue: "" });
+
+  const usernameQuery = useDebounce(username) ?? "";
+
+  useCheckUsernameQuery(usernameQuery);
 
   const { mutate } = useSignupMutate();
 
@@ -119,7 +132,11 @@ export default function SignUp() {
                 </Field>
 
                 <Field>
-                  <Button type="submit" className="h-12 w-full">
+                  <Button
+                    disabled={!isChecked}
+                    type="submit"
+                    className="h-12 w-full"
+                  >
                     Create Account
                   </Button>
                 </Field>

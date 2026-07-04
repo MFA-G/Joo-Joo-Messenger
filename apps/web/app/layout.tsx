@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { QueryProvider } from "@/providers/query-provider";
 
-
 export const metadata: Metadata = {
   title: "Joo-joo Messenger",
   description: "A modern, privacy-first, open-source messaging platform",

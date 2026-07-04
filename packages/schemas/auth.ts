@@ -28,12 +28,12 @@ export const signupSchema = z
     message: "Passwords do not match",
   });
 
-const signinSchema = z.object({
+export const signinSchema = z.object({
   username: usernameSchema,
   password: passwordSchema,
 });
 
-const checkUsernameQuery = z.object({
+export const checkUsernameQuery = z.object({
   username: z
     .string()
     .trim()

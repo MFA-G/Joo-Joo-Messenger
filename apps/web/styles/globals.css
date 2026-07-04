@@ -191,7 +191,8 @@
     @apply font-sans bg-background text-foreground;
   }
 
-  button:is([type="button"]) {
+  button:is([type="button"]),
+  button:is([type="submit"]) {
     cursor: pointer;
   }
 }
