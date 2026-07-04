@@ -1,5 +1,11 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { type SignupInput, signupSchema } from "@joo-joo-messenger/schemas";
+import Image from "next/image";
+import Link from "next/link";
+import * as React from "react";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -10,12 +16,6 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
-import Link from "next/link";
-import { SubmitHandler, useForm } from "react-hook-form";
-import * as React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SignupInput, signupSchema } from "@joo-joo-messenger/schemas";
 import { useSignupMutate } from "@/hooks/use-auth";
 
 export default function SignUp() {
@@ -100,7 +100,9 @@ export default function SignUp() {
                     id="terms-checkbox-basic"
                     name="terms-checkbox-basic"
                     checked={isChecked}
-                    onCheckedChange={setIsChecked}
+                    onCheckedChange={(checked) =>
+                      setIsChecked(checked === true)
+                    }
                   />
                   <FieldLabel htmlFor="terms-checkbox-basic">
                     <p>
